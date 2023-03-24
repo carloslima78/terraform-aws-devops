@@ -1,0 +1,44 @@
+
+Link dos Provedores Terraform 
+
+    - Tratam-se dos provedores Cloud suportados pelo Terraform (AWS, Azure, Google Cloud, etc.)
+
+    https://registry.terraform.io/browse/providers
+
+
+Comandos
+
+- Demonstra a documentação dos comandos Terraform
+
+    - terraform -h 
+
+=======================================================================================================
+
+- Inicia o Terraform
+
+    - terraform init
+
+=======================================================================================================
+
+- Apresenta o plano dos recursos que serão provisionados
+
+    - terraform plan
+
+=======================================================================================================
+
+- Aplica o lançamento dos recursos planejados
+
+    - terraform apply
+
+=======================================================================================================
+
+- Variáveis
+
+=======================================================================================================
+
+
+- Lista os Buckets S3 gerados, inclusive o gerado a partir do Terraforma acima
+
+    - aws s3 ls
+
+
