@@ -8,6 +8,14 @@ Link dos Provedores Terraform
 
 Comandos
 
+- Inicia AWS para acesso do usuário via CLI (Chaves de acesso)
+
+    - aws configure
+    - AWS Access Key ID [****************G2R4]:     
+    - AWS Secret Access Key [****************+f5r]: 
+    - Default region name [us-east-1]: 
+    - Default output format [json]:
+
 - Demonstra a documentação dos comandos Terraform
 
     - terraform -h 
@@ -30,11 +38,7 @@ Comandos
 
     - terraform apply
 
-=======================================================================================================
-
-- Variáveis
-
-=======================================================================================================
+======================================================================================================
 
 
 - Lista os Buckets S3 gerados, inclusive o gerado a partir do Terraforma acima
