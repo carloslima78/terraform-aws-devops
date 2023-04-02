@@ -1,0 +1,304 @@
+
+Tipos de arquivos
+
+- main.tf
+- terraform.lock.hcl 
+- variables.tfvars
+- meu-arquivo.tfvars
+- meu-arquivo.auto.tfvars
+- locals.tf 
+- outputs.tf
+- random.tf
+
+- terraform.tfstate 
+        
+    - Armazena toda a informação referente a infraestrutura criada com o Terraform.
+    - Sempre que for alterar algo, o Terraform comparar o conteúdo desse arquivo com os recursos na AWS.
+    - A cada atualização em recursos, o Terraform atualiza o arquivo ".tfstate".
+    - É requerido para alterações na infraestrutura.
+    - Caso conste uma versão diferente no arquivo ".tfstate" em relação a versão do Terraform, acusará incompatibilidade.
+
+========================================================================================================
+   
+Comandos 
+
+- Inicia o Terraform
+
+    - terrform init
+
+- Apresenta o planejamento do recurso que será provisionado
+
+    - terraform plan
+
+- Aplica o provisionamento do recurso
+
+    - terraform apply
+
+- Aplica o provisionamento do recurso sem solicitar confirmarção
+
+    - terraform apply -auto-approve
+
+- Aplica um script com variáveis de ambiente
+
+    - Para esse exemplo, usaremos as credenciais da conta AWS 
+
+        - AWS_ACCESS_KEY_ID=SUA-[ACCESS-KEY] AWS_SECRET_KEY=[SUA-SECRET-KEY] terraform apply
+
+- Verifica se os comandos no script são válidos
+
+    - terraform validate
+
+- Formata o código do script nos arquivos Terraform
+
+    - terraform fmt
+
+- Formata o código do script nos arquivos Terraform dentro das estruturas de pasta recursivamente
+
+    - terraform fmt -recursive
+
+- Destrói os recursos criados
+
+    - terraform destroy
+
+- Permite listar atributos de um recurso
+
+    // Abre o console
+    - terraform console
+    
+    // Lista todos os atributos do bucket 
+    - aws_s3_bucket.this
+
+    // Lista um atributo específico do bucket, neste caso o "arn"
+    - aws_s3_bucket.this.arn
+
+- Importa recursos que não foram criados via Terraform, de forma que passem a ser gerenciados por ele. 
+
+    - terraform import seu-recurso
+
+- Altera recursos já existentes em um template
+
+    - Primeiro passo é alterar ou adicionar algo no arquivo "main.tf"
+
+        # Valida o arquivo
+        - terraform validate 
+        
+        # Formata a identação do arquivo
+        - terraform fmt
+
+        # A flag -out=("tfplan.out") permite que o "terraform apply" escreva seu output no arquivo "tfplan.out"
+        # O comando "terraform apply" poderá usar este arquivo para a atualização de recursos.
+        - terraform plan -out="tfplan.out"
+        
+        # Executa o apply utilizandoo arquivo tfplan.out
+        - terraform apply "tfplan.out"
+
+- IMPORTANTE:
+
+    - Deve ser aplicado no mesmo arquivo "main.tf" que originou o recurso.
+    - Caso gerar um novo "main.tf", o comando "plan" vai considerar uma criação e não uma atualização.
+    - Caso o nome do recurso for alterado, o Terraform o removerá e criará um novo considerando o novo nome.
+
+
+========================================================================================================
+
+- Variáveis 
+
+    - Pasta de trabalho "3. Variáveis"
+
+    - Documentação
+
+        https://developer.hashicorp.com/terraform/language/values/variables
+
+- Arquivo "variables.tf":
+
+    - Declara as variáveis e atribui nome, tipo, descrição, valores padrão e metadados adicionais.
+
+- Arquivo "tfvars":
+
+    - Atribui valores para as variáveis ​​durante a execução. 
+    - Permite se personalize uma execução específica.
+
+- Passos para lançar um recurso utilizando variáveis:
+
+    - Gerar as varíáveis para o recurso de acordo com o arquivo "variables.tb"
+    - Atribuir as variáveis substituindo os valores explicitos nos parâmetros dos recurso no arquivo "main.tf".
+    - Comando "terraform plan" vai apresentar o plano considerando as variáveis aplicadas.
+    - Comando "terraform apply -auto-approve" para aplicar sem a confirmação.
+
+- IMPORTANTE:
+
+    - Se não preenchermos o valor "default" da variável, seu preenchimento se torna obrigatório.
+    - Será exigido o preenchimento no momento do lançamento do recurso.
+    - Recurso bastante interessante em ambiente de CI, pois podemos preencher o nome do ambiente em runtime.
+
+- É possível setar as variáveis no terraform plan através da flag "-var" 
+
+    - Comando: terraform plan -var="NOME-DA-VARIAVEL=VALOR-DA-VARIAVEL"
+    - Comando: terraform plan -var="ec2-instance-type=t2.micro"
+
+- É possível setar as variáveis via o arquivo "terraform.tfvars"
+
+    - Criar um arquivo "terraform.tfvars"
+    - Retirar o "default" das variáveis no arquivo "variables.tf" tornando-as obrigatórias.
+    - Apontar as variáveis e preencher os valores no arquivo "terraform.tfvars".
+
+- Qualquer arquivo nomeado como "terraform.tfvars" ou "nome-do-arquivo.auto.tfvars" o Terraform lê automaticamente.
+- Interessante para gerenciar configurações específicas, como ambientes Dev, Prod, etc.
+- Os valores atribuídos nos arquivos específicos ".tfvars" sobrepõem os valores do "terraform.tfvars".
+    
+    - terraform plan -var-file="nome-arquivo.tfvars"
+
+- Documentação de como o Terraform precede para considerar as variáveis de acordo com os arquivos:
+
+    https://developer.hashicorp.com/terraform/language/values/variables#variable-definition-precedence
+
+========================================================================================================
+
+- Interpolação - Random
+
+    - Pasta de trabalho "4. Interpolação - local outputs import"
+
+    - Concatena uma expressão e considera o que está entre chaves "Hello, ${var.name}!"
+
+    - Documentação do provider Random
+
+        https://registry.terraform.io/providers/hashicorp/random/latest/docs
+
+- Passos para utilizar concatenação com Random (Interploação)
+
+    - Nesse exemplo, vamos atribuir um tamanho a um Bucket S3 usando o provider Random
+
+    - Criar o required_providers Random no arquivo "main.tf"
+    - Criar o arquivo "random.tf" e criar o resource "random_pet" preenchendo o parâmetro "length".
+        - Determina a quantidade de palavras para o nome randômico para o bucket
+    - Criar o arquivo "S3.tf" e criar o resource "aws_s3_bucket" e preencher o parâmetro "bucket" com o resource criado
+        em "random.tf" (bucket = "${random_pet.bucket.id}-${var.environment}").
+    - Executar terraform plan 
+    - Executar terraform apply 
+
+========================================================================================================
+
+- Local
+
+    - Pasta de trabalho "4. Interpolação - local outputs import"
+
+    - Utilizado para armazenar variáveis que podem ser comuns e reutilizadas.
+
+- Passos para utilizar concatenação com Random (Locals)
+
+    - Gerar um arquivo "locals.tf" e definir o bloco locals.
+    - Criar as variáveis comuns.
+    - Atribuir no resource correspondente, em nosso exemplo no "S3.tf".
+    - Executar terraform plan 
+    - Executar terraform apply 
+
+========================================================================================================
+
+- Output 
+
+    - Utilizado para imprimir valores definidos no arquivo outputs.tf após a execução do apply.
+
+========================================================================================================
+
+- Import 
+
+    - Pasta de trabalho "4. Interpolação - local outputs import"
+
+    - Utilizado para os casos onde os recursos foram criados manualmente e precisamos passar a gerenciá-los 
+        via Terraform.
+    - Atraves do "Import", podemos importar um recurso para a gestão do Terraform. 
+    - Passará a estar presente no arquivo .tfstate como um recurso Terraform. 
+
+    - Documentação 
+
+        https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#import
+
+
+- Passos (Exemplo com um Bucket S3)
+
+    - Ter um Bucket criado manualmente no Console ou algum outro meio.
+
+    - Incluir o bucket como um recurso  
+
+        resource "aws_s3_bucket" "criado-manual" {
+            
+            bucket = bucket-name
+        }
+
+    - Executar o comando:
+
+        terraform import aws_s3_bucket.bucket.nome-recurso bucket-name
+
+    - Visualizar o bucket importado 
+
+        - terraform console
+        - aws_s3_bucket.nome-recurso.bucket
+        - Imprimirá o nome do bucket importado
+
+        - Ou visualizar no arquivo tfstate
+
+    - O recurso passará a ser gerenciado pelo Terraform.
+
+========================================================================================================
+
+Remote State
+
+    - Permite a gestão remota dos dados de estado dos recursos (arquivo .tfstate).
+    - O arquivo .tfstate via Remote State passa a ser gerenciado em ambiente de nuvem.
+    - No caso da AWS,o arquivo .tfstate estará armazenado em um Bucket S3.
+    - back-end define onde o Terraform armazena seus arquivos de dados de estado.
+    - Fomenta o trabalho em equipe.
+    - Suporta locking, ou seja, se estiver locado, nenhum outro usuário manipula.
+    - O Terraform oferece suporte ao armazenamento de estado no Terraform Cloud, Amazon S3, Azure Blob Storage,
+         Google Cloud Storage, Alibaba Cloud OSS, etc.
+
+    - Documentação Remote State
+
+        https://developer.hashicorp.com/terraform/language/state/remote
+
+    - Documentação Configurando o Back End 
+
+        https://developer.hashicorp.com/terraform/language/settings/backends/configuration
+
+    - Em nosso exemplo, usaremos o S3 como back-end.
+
+        https://developer.hashicorp.com/terraform/language/settings/backends/s3
+
+========================================================================================================
+
+Template
+
+- Utilizado para situações onde temos strings grandes ou complexas.
+- Um caso de uso, são as configurações de Tasks ECS.
+- São gerados em arquivo Json "template.json.tpl".
+- Deve ser gerado antes da execução apply com um esquema pŕe definido. 
+
+- Documentação
+
+    https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file
+
+========================================================================================================
+
+Built-in Functions
+
+    - Semelhante métodos ou funções com parâmetros e ações presentes em linguagens de programação.
+
+    - Documentação 
+
+        https://developer.hashicorp.com/terraform/language/functions
+
+========================================================================================================
+
+Data Source
+
+    - Permite consumir informações de diferentes projetos Terraform ou não gerenciados por ele.
+    - Cada resource possui tipos específicos de Data Source.
+        - Exemplo, o S3 possui aws_s3_bucket, aws_s3_bucket_object, etc.
+        - É possível ver os Data Sources de um recurso no lin
+
+    - Documentação 
+
+        https://developer.hashicorp.com/terraform/language/data-sources
+
+
+       
