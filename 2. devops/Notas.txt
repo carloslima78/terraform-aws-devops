@@ -291,15 +291,18 @@ Built-in Functions
 
 Data Source
 
-    - Permite consumir informações de diferentes projetos Terraform ou não gerenciados por ele.
-    - Cada resource possui tipos específicos de Data Source.
-        - Exemplo, o S3 possui aws_s3_bucket, aws_s3_bucket_object, etc.
-        - É possível ver os Data Sources de um recurso no lin
+- Permite consumir informações de diferentes configurações/módulos Terraform ou não gerenciados por ele.
+- Permite consultar informações de resources de acordo com o Data Source oferecido.
 
-    - Documentação 
+- Cada Resource pode oferecer tipos específicos de Data Source.
+        
+    - Exemplo: O AWS S3 possui os Data Sources "aws_s3_bucket", "aws_s3_bucket_object", etc.
 
-        https://developer.hashicorp.com/terraform/language/data-sources
+- Documentação 
 
+    https://developer.hashicorp.com/terraform/language/data-sources
+
+========================================================================================================
 
       
 
