@@ -291,12 +291,19 @@ Built-in Functions
 
 Data Source
 
-- Permite consumir informações de diferentes configurações/módulos Terraform ou não gerenciados por ele.
-- Permite consultar informações de resources de acordo com o Data Source oferecido.
+- Recupera informações de uma fonte externa (Provedor Cloud ou sistema de armazenamento).
+- Torna essas informações disponíveis para configurar outros recursos do Terraform.
+- Evita a duplicação de informações e garante configurações precisas e atualizadas em tempo real.
+- Utiliza o bloco "data" para declarar os Data Source em um arquivo "data.tf".
+
+- Caso de Uso: Recuperar dados de um EC2 para usar em outro recurso.
 
 - Cada Resource pode oferecer tipos específicos de Data Source.
         
     - Exemplo: O AWS S3 possui os Data Sources "aws_s3_bucket", "aws_s3_bucket_object", etc.
+
+- No exemplo "hands on" presente na pasta, vamos recuperar os outputs de uma instância EC2 e imprimir
+    no arquivo outputs.json no módulo do bucket S3.
 
 - Documentação 
 

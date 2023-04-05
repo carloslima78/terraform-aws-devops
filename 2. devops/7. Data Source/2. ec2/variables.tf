@@ -8,14 +8,6 @@ variable "aws-region" {
   default     = "us-east-1"
 }
 
-// AMI da imagem da instância EC2
-variable "ami" {
-
-  type        = string
-  description = ""
-  default     = "ami-0263e4deb427da90e"
-}
-
 // Tipo da instância EC2
 variable "type" {
 
