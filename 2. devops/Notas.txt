@@ -281,8 +281,19 @@ Template
 
 Built-in Functions
 
-    - Semelhante métodos ou funções com parâmetros e ações presentes em linguagens de programação.
+    - São funções pré-definidas que podem ser usadas para manipular valores em arquivos de configuração
+         do Terraform.
+    - Podem ser usadas para transformar, formatar, validar e manipular valores de variáveis, recursos e 
+        outros objetos dentro do Terraform.
+    - Semelhante a funções com parâmetros e ações presentes em linguagens de programação.
 
+        - lower e upper: Converte uma string para letras minúsculas ou maiúsculas, respectivamente.
+        - trim: Remove os espaços em branco no início e no fim de uma string.
+        - concat: Concatena duas ou mais strings juntas.
+        - element: Retorna o elemento de um índice específico de uma lista.
+        - format: Formata uma string com base em um modelo e valores de variáveis.
+        - jsonencode e yamlencode: Converte um objeto em uma string JSON ou YAML, respectivamente.
+        
     - Documentação 
 
         https://developer.hashicorp.com/terraform/language/functions
@@ -311,7 +322,20 @@ Data Source
 
 ========================================================================================================
 
-      
+Interações for_each e for 
 
+- for_eache for são usados para criar e gerenciar vários recursos em vez de apenas um único recurso.
+- No entanto, eles têm diferentes formas de funcionamento.
+
+- for_each permite iterar sobre um mapa ou conjunto de valores e criar um conjunto correspondente de recursos.
+- Cada elemento do mapa ou conjunto é usado como um identificador único para cada instância do recurso.   
+- O uso do for_eaché especialmente útil quando você precisa criar vários recursos semelhantes com base 
+    em um conjunto de dados.
+
+- for é mais simples e pode ser usado para criar um número definido de recursos.
+- Útil quando você precisa criar um número fixo de recursos com configurações.
+
+- Enquanto o for_eaché usado para criar recursos baseados em um conjunto de variáveis ​​de dados, 
+    o for é usado para criar um número definido de recursos com configurações específicas.
 
        
