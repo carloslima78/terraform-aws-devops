@@ -180,9 +180,13 @@ Comandos
 
 - Local
 
-    - Pasta de trabalho "4. Interpolação - local outputs import"
+- Componentes chave:
 
-    - Utilizado para armazenar variáveis que podem ser comuns e reutilizadas.
+    - locals
+
+- Pasta de trabalho "4. Interpolação - local outputs import"
+
+- Utilizado para armazenar variáveis que podem ser comuns e reutilizadas.
 
 - Passos para utilizar concatenação com Random (Locals)
 
@@ -194,13 +198,17 @@ Comandos
 
 ========================================================================================================
 
-- Output 
+Output 
 
-    - Utilizado para imprimir valores definidos no arquivo outputs.tf após a execução do apply.
+- Componentes chave:
+
+    - output
+
+- Utilizado para imprimir valores definidos no arquivo outputs.tf após a execução do apply.
 
 ========================================================================================================
 
-- Import 
+Import 
 
     - Pasta de trabalho "4. Interpolação - local outputs import"
 
@@ -268,6 +276,10 @@ Remote State
 
 Template
 
+- Componentes chave:
+
+     - random_pet
+
 - Utilizado para situações onde temos strings grandes ou complexas.
 - Um caso de uso, são as configurações de Tasks ECS.
 - São gerados em arquivo Json "template.json.tpl".
@@ -283,16 +295,37 @@ Built-in Functions
 
     - São funções pré-definidas que podem ser usadas para manipular valores em arquivos de configuração
          do Terraform.
+    
     - Podem ser usadas para transformar, formatar, validar e manipular valores de variáveis, recursos e 
         outros objetos dentro do Terraform.
+    
     - Semelhante a funções com parâmetros e ações presentes em linguagens de programação.
 
-        - lower e upper: Converte uma string para letras minúsculas ou maiúsculas, respectivamente.
-        - trim: Remove os espaços em branco no início e no fim de uma string.
-        - concat: Concatena duas ou mais strings juntas.
-        - element: Retorna o elemento de um índice específico de uma lista.
-        - format: Formata uma string com base em um modelo e valores de variáveis.
-        - jsonencode e yamlencode: Converte um objeto em uma string JSON ou YAML, respectivamente.
+    - Exemplos de funções:
+
+        - lower e upper: 
+        
+            - Converte uma string para letras minúsculas ou maiúsculas, respectivamente.
+        
+        - trim: 
+        
+            - Remove os espaços em branco no início e no fim de uma string.
+        
+        - concat: 
+        
+            - Concatena duas ou mais strings juntas.
+        
+        - element: 
+        
+            - Retorna o elemento de um índice específico de uma lista.
+        
+        - format: 
+        
+            - Formata uma string com base em um modelo e valores de variáveis.
+        
+        - jsonencode e yamlencode: 
+        
+            - Converte um objeto em uma string JSON ou YAML, respectivamente.
         
     - Documentação 
 
@@ -301,6 +334,10 @@ Built-in Functions
 ========================================================================================================
 
 Data Source
+
+- Componentes chave:
+
+    - data
 
 - Recupera informações de uma fonte externa (Provedor Cloud ou sistema de armazenamento).
 - Torna essas informações disponíveis para configurar outros recursos do Terraform.
@@ -322,9 +359,14 @@ Data Source
 
 ========================================================================================================
 
-Interações for_each e for 
+Interações Foreach e For 
 
-- for_each e e for são usados para criar e gerenciar vários recursos em vez de apenas um único recurso.
+- Componentes chave:
+
+    - for_each
+    - for
+
+- "Foreach" e "For" são usados para criar e gerenciar vários recursos em vez de apenas um único recurso.
 - No entanto, eles têm diferentes formas de funcionamento.
 
 - for_each permite iterar sobre um mapa ou conjunto de valores e criar um conjunto correspondente de recursos.
@@ -341,6 +383,14 @@ Interações for_each e for
 ========================================================================================================
 
 Modules
+
+- Componentes chave:
+
+    - module
+    - dynamic 
+    - content
+    - website
+    - policy
 
 - Tratam-se de uma coleção contendo múltiplos recursos (Resources) reutilizáveis.
 - Podem ser sados para definir recursos comuns, como banco de dados, balanceadores, VPCs, etc.

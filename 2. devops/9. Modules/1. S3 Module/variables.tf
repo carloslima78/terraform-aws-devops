@@ -32,3 +32,10 @@ variable "tags" {
     description = ""
     default = {}
 }
+
+variable "website" {
+
+    description = "Mapeia as configurações do website"
+    type = map(string)
+    default = {}  
+}
