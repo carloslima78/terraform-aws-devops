@@ -1,6 +1,6 @@
 # AWS S3 Terraform module
 
-Terraform module que cria um bucket S3 com três objetos S3 na AWS.
+Módulo para provisionar um bucket S3 com três objetos na AWS.
 
 Tipos de recursos suportados:
 
@@ -11,7 +11,7 @@ Tipos de recursos suportados:
 
 ```hcl
 module "bucket" {
-  source = "./s3_module"
+  source = "./1. S3 Module"
 
   name = "my-super-bucket-name"
 }
@@ -21,7 +21,7 @@ module "bucket" {
 
 ```hcl
 module "bucket" {
-  source = "./s3_module"
+  source = "./1. S3 Module"
 
   name  = random_pet.this.id
   files = "${path.root}/website"
@@ -34,8 +34,6 @@ module "bucket" {
 ```
 
 ## Criação
-
-
 
 
 ## Inputs
