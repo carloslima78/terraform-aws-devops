@@ -49,3 +49,11 @@ variable "files" {
   type    = string
   default = ""
 }
+
+variable "versioning" {
+
+    description = "Mapeia as configurações do versionamento"
+    type = map(string)
+    default = {}  
+}
+

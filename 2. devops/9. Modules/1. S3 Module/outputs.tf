@@ -33,3 +33,8 @@ output "hosted-zone-id" {
 
     value = aws_s3_bucket.this.hosted_zone_id
 }
+
+output "files" {
+
+    value = [for filename, data in module.objects : filename]
+}

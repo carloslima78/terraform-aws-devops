@@ -32,6 +32,12 @@ module "bucket" {
   source = "./1. S3 Module"
 
   name = random_pet.this.id
+
+  versioning = {
+
+    enabled = true
+  }
+
 }
 
 // Nome randômico que será atribuído ao Website
@@ -47,6 +53,8 @@ module "website" {
   source = "./1. S3 Module"
 
   name = random_pet.website.id
+
+  acl = "public-read"
 
   // Permite que o módulo leita todos os arquivos dentro da pasta "Website"
   files = "${path.root}/2. Website"
