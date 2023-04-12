@@ -15,8 +15,8 @@ Estudos e projeto utilizando receitas Terraform provisionando recursos na AWS.
 |Formata o código dos arquivos| terraform fmt|
 |Formata o código dos arquivos varrendo as estruturas de pastas| terraform fmt -recursive|
 |Destrói os recursos criados| terraform destroy|
-|Passos para listar atributos de um recurso | terraform console </br>
-aws_s3_bucket.nomedobucket|
+|Passos para listar atributos de um recurso | terraform console 
+ aws_s3_bucket.nomedobucket|
 
 ## Autor
 
