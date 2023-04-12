@@ -397,12 +397,12 @@ Modules
     - policy
 
 - Tratam-se de uma coleção contendo múltiplos recursos (Resources) reutilizáveis.
-- Podem ser sados para definir recursos comuns, como banco de dados, balanceadores, VPCs, etc.
+- Podem ser usados para definir recursos comuns, como banco de dados, balanceadores, VPCs, etc.
 - Podem definir uma infraestrutura compartilhada, como rede, políticas de segurança, etc.
 - Os "Módulos" são definidos em arquivos separados e podem ser armazenados em repositórios de código.
 
 - Importante:
 
-    - Após a criação de um módulo, é criado automaticamente o arquivo "modules.json" contendo o 
+    - Após a criação de um módulo, é gerado automaticamente o arquivo "modules.json" contendo o 
         mapeamento dos recursos, para que possam ser reutilizados posteriormente.
        
