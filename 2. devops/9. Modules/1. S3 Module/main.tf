@@ -34,5 +34,14 @@ resource "aws_s3_bucket" "this" {
 module "object" {
 
   source = "../3. S3 Object"
+
+  for_each = var.files != "" ? fileset(var.files, "**") : []
+
+  bucket = aws_s3_bucket.this.bucket
+  key    = "${var.key_prefix}/${each.value}"
+  src    = "${var.files}/${each.value}"
+
 }
+
+
 

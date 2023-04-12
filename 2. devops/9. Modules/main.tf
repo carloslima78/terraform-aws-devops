@@ -48,6 +48,9 @@ module "website" {
 
   name = random_pet.website.id
 
+  // Permite que o módulo leita todos os arquivos dentro da pasta "Website"
+  files = "${path.root}/2. Website"
+
   website = {
     
     index_document = "index.html"

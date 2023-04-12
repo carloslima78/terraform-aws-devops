@@ -52,6 +52,10 @@ Comandos
 
     - terraform fmt
 
+- Formata o código do script nos arquivos Terraform varrendo toda estrutrua de pastas
+
+    - terraform fmt -recursive
+
 - Formata o código do script nos arquivos Terraform dentro das estruturas de pasta recursivamente
 
     - terraform fmt -recursive
