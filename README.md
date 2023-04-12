@@ -6,7 +6,7 @@ Estudos e projeto utilizando receitas Terraform provisionando recursos na AWS.
 
 | Descrição | Comando | 
 |------|-------------|
-|Inicia o Terraform e instala os recursos| terraform init|
+|Inicia o Terraform e instala os componentes de acordo com os recursos que serão criados| terraform init|
 |Apresenta o plano dos recursos que serão criados| terraform plan| 
 |Aplica a criação dos recursos conforme o "plan"| terraform apply| 
 |Aplica a criação dos recursos sem solicitar confirmação | terraform apply -auto-approve| 
@@ -15,8 +15,6 @@ Estudos e projeto utilizando receitas Terraform provisionando recursos na AWS.
 |Formata o código dos arquivos| terraform fmt|
 |Formata o código dos arquivos varrendo as estruturas de pastas| terraform fmt -recursive|
 |Destrói os recursos criados| terraform destroy|
-|Passos para listar atributos de um recurso | terraform console 
- aws_s3_bucket.nomedobucket|
 
 ## Autor
 
