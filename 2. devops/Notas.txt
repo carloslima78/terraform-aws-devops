@@ -56,10 +56,6 @@ Comandos
 
     - terraform fmt -recursive
 
-- Formata o código do script nos arquivos Terraform dentro das estruturas de pasta recursivamente
-
-    - terraform fmt -recursive
-
 - Destrói os recursos criados
 
     - terraform destroy
@@ -405,4 +401,12 @@ Modules
 
     - Após a criação de um módulo, é gerado automaticamente o arquivo "modules.json" contendo o 
         mapeamento dos recursos, para que possam ser reutilizados posteriormente.
+
+========================================================================================================
+
+Workspaces
+
+- Utilizado quanto temos configurações distintas para um mesmo back-end.
+- Possiblita utilizar o mesmo backend, pois as variáveis por exemplo, passam a ser baseadas no 
+    Workspace.
        
