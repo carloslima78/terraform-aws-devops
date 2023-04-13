@@ -44,6 +44,7 @@ curl -LO https://releases.hashicorp.com/terraform/1.0.11/terraform_1.0.11_linux_
 
 - Obs: A versão 1.0.11pode ser diferente no momento da sua instalação. Você pode conferir a versão mais recente do Terraform em (https://www.terraform.io/downloads.html).
 
+
 4. Descompacte o arquivo ZIP usando o comando abaixo:
 
 ```hcl
