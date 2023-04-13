@@ -56,10 +56,6 @@ terraform workspace select dev
 terraform destroy -auto-approve
 ```
 
-## Mão na Massa
-
-Existe um projeto para Workspace no diretório 10. Workspaces.
-
 ## Autor
 
 [Carlos Fabiano Lima](https://github.com/carloslima78)
