@@ -32,13 +32,13 @@ terraform workspace new dev
 terraform workspace select dev 
 ```
 
-- Planeja a configuração de um Workspace considerando o arquivo de variáveis ".tfvars":
+- Planeja a os recursos presentes nos arquivos de um Workspace considerando o arquivo de variáveis ".tfvars":
 
 ```hcl
 terraform plan -var-file=dev.tfvars 
 ```
 
-- Implanta a configuração presente no Workspace "dev":
+- Implanta a os recursos presentes nos arquivos de um Workspace considerando o arquivo de variáveis ".tfvars":
 
 ```hcl
 terraform apply -var-file=dev.tfvars -auto-approve  
