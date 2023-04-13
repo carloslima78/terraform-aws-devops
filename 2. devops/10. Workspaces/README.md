@@ -10,99 +10,57 @@ Quando muda-se de um workspace para outro, o estado do Terraform é atualizado p
 
 Supondo que existem os ambientes de desenvolvimento e produção, é possível isolar cada um desses ambientes em Workspaces específicos, garantindo o gerenciamento segregado.
 
-## Passo a Passo - Mão na Massa
+## Comandos Principais
 
-1. Crie dois Workspaces, sendo um para desenvolvimento e outro para produção:
+- Lista os Workspaces existentes:
+
+  - O Workspace "default" é o padrão caso não tenha se criado outros.
+
+```hcl
+terraform workspace list
+```
+
+- Cria um novo Workspace
 
 ```hcl
 terraform workspace new dev
 ```
 
-```hcl
-terraform workspace new prod
-```
-
-2. Crie o arquivo "main.tf" contendo as configurações para duas instâncias EC2:
+- Seleciona um Workspace, neste caso "dev":
 
 ```hcl
-terraform {
-
-  required_version = ">=1.3.7"
-
-  # Loca o Provider AWS
-  required_providers {
-
-    aws = {
-
-      # Dados da origem e versão, encontrados no arquivo ".terraform.lock.hcl"
-      source  = "hashicorp/aws"
-      version = "4.58.0"
-
-    }
-  }
-}
-
-# Região
-provider "aws" {
-
-  region = "us-east-1"
-}
-
-# Configurações da instância EC2 para o ambiente de desenvolvimento
-resource "aws_instance" "web-dev" {
-  ami           = "ami-0263e4deb427da90e"
-  instance_type = "t2.micro"
-}
-
-# Configurações da instância EC2 para o ambiente de produção
-resource "aws_instance" "web-prod" {
-  ami           = "ami-0263e4deb427da90e"
-  instance_type = "t3.micro"
-}
-```
-
-3. Crie dois arquivos separados "dev.tfvars" e "prod.tfvars" e defina as variáveis conforme abaixo:
-
-```hcl
-# dev.tfvars
-instance_count = 2
-
-instance_tags = {
-  
-  name = "web-dev"
-}
-```
-
-```hcl
-# prod.tfvars
-instance_count = 3
-
-instance_tags = {
-  
-  name = "web-prod"
-}
-```
-
-4. Conforme os comandos abaixo, selecione o Workspace desejado e crie os recursos conforme o ambiente de desenvolvimento e produção:
-
-```hcl
-# Seleciona o workspace dev
 terraform workspace select dev 
+```
 
-# Planeja a configuração de desenvolvimento
-terraform apply -var-file=dev.tfvars 
+- Planeja a configuração de um Workspace considerando o arquivo de variáveis ".tfvars":
 
-# Implanta a configuração de desenvolvimento
-terraform apply -var-file=dev.tfvars  
+```hcl
+terraform plan -var-file=dev.tfvars 
+```
+
+- Implanta a configuração presente no Workspace "dev":
+
+```hcl
+terraform apply -var-file=dev.tfvars -auto-approve  
+```
+
+- Destrói os recursos criados via o Workspace dev:
+
+  - Caso esteja em outro Workspace, é necessário selecionar o que se deseja remover os recursos.
+
+```hcl
+terraform workspace select dev 
 ```
 
 ```hcl
-# Seleciona o workspace prod
-terraform workspace select prod 
-
-# Planeja a configuração de produção
-terraform apply -var-file=prod.tfvars 
-
-# Implanta a configuração de produção
-terraform apply -var-file=prod.tfvars  
+terraform destroy -auto-approve
 ```
+
+## Mão na Massa
+
+Existe um projeto para Workspace no diretório 10. Workspaces.
+
+## Autor
+
+[Carlos Fabiano Lima](https://github.com/carloslima78)
+
