@@ -62,6 +62,14 @@ on linux_amd64
 
 ## Comandos Básicos do Terraform
 
+- Apresenta a documentação dos comandos Terraform:
+
+```hcl
+terraform -h 
+```
+
+Demonstra a documentação dos comandos Terraform
+
 | Descrição | Comando | 
 |------|-------------|
 |Inicia o Terraform e instala os componentes de acordo com os recursos que serão criados| terraform init|
