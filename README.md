@@ -18,7 +18,7 @@ Segue abaixo, algumas ferramentas equivalentes ao Terraform:
 - Azure: Azure Resource Manager (ARM), Bicep.
 - Google Cloud Platform (GCP): Deployment Manager.
 
-As das ferramentas descritas acima, são produtos acoplados a um fornecedor de nuvem, e assim como o Terraform, existem outras opções de IaaC agnósticas disponíveis, como Ansible, Chef, Puppet, SaltStack, entre outras.
+As ferramentas descritas acima, tratam-se de produtos acoplados a um fornecedor de nuvem, e assim como o Terraform, existem outras opções disponíveis de IaaC que são agnósticas a fornecedores, como Ansible, Chef, Puppet, SaltStack, entre outras.
 
 Vale observar que a utilização do Terraform em ambientes AWS, Azure, GCP, etc, evita o lock in e viabiliza operações multi cloud.
 
@@ -103,7 +103,7 @@ terraform apply -auto-approve
 
 - Aplica a criação dos recursos conforme o planejamento apresentado no "terraform plan", considerando variáveis de ambiente, caso tenham sido criadas:
 
-No exemplo abaixo, considera-se as variáveis de ambiente para credenciais de acesso de usuário IAM da AWS.
+    - No exemplo abaixo, considera-se as variáveis de ambiente para credenciais de acesso de usuário IAM da AWS.
 
 ```hcl
 AWS_ACCESS_KEY_ID=[tua-access-key] AWS_SECRET_KEY=[tua-secret-key] terraform apply
