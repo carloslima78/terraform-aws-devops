@@ -22,44 +22,6 @@ Tipos de arquivos
    
 Comandos 
 
-- Inicia o Terraform
-
-    - terrform init
-
-- Apresenta o planejamento do recurso que será provisionado
-
-    - terraform plan
-
-- Aplica o provisionamento do recurso
-
-    - terraform apply
-
-- Aplica o provisionamento do recurso sem solicitar confirmarção
-
-    - terraform apply -auto-approve
-
-- Aplica um script com variáveis de ambiente
-
-    - Para esse exemplo, usaremos as credenciais da conta AWS 
-
-        - AWS_ACCESS_KEY_ID=SUA-[ACCESS-KEY] AWS_SECRET_KEY=[SUA-SECRET-KEY] terraform apply
-
-- Verifica se os comandos no script são válidos
-
-    - terraform validate
-
-- Formata o código do script nos arquivos Terraform
-
-    - terraform fmt
-
-- Formata o código do script nos arquivos Terraform varrendo toda estrutrua de pastas
-
-    - terraform fmt -recursive
-
-- Destrói os recursos criados
-
-    - terraform destroy
-
 - Permite listar atributos de um recurso
 
     // Abre o console
