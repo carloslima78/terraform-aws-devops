@@ -12,7 +12,15 @@ to-do
 
 ## Equivalentes
 
-to-do
+Segue abaixo, algumas ferramentas equivalentes ao Terraform:
+
+- AWS: CloudFormation, CDK (Cloud Development Kit).
+- Azure: Azure Resource Manager (ARM), Bicep.
+- Google Cloud Platform (GCP): Deployment Manager.
+
+As das ferramentas descritas acima, são produtos acoplados a um fornecedor de nuvem, e assim como o Terraform, existem outras opções de IaaC agnósticas disponíveis, como Ansible, Chef, Puppet, SaltStack, entre outras.
+
+Vale observar que a utilização do Terraform em ambientes AWS, Azure, GCP, etc, evita o lock in e viabiliza operações multi cloud.
 
 ## Instalando o Terraform no Linux Ubuntu
 
@@ -53,7 +61,7 @@ sudo mv terraform /usr/local/bin/
 terraform version
 ```
 
-O resultado do comando acima deve apresentar a versão instalada do Terraform conforme abaixo
+O resultado do comando acima deve apresentar a versão instalada do Terraform conforme abaixo:
 
 ```hcl
 Terraform v1.3.7
@@ -75,18 +83,55 @@ terraform -h
 terraform init 
 ```
 
-Demonstra a documentação dos comandos Terraform
+- Apresenta o plano dos recursos que serão criados de acordo com as receitas Terraform:
 
-| Descrição | Comando | 
-|------|-------------|
-|Apresenta o plano dos recursos que serão criados| terraform plan| 
-|Aplica a criação dos recursos conforme o "plan"| terraform apply| 
-|Aplica a criação dos recursos sem solicitar confirmação | terraform apply -auto-approve| 
-|Aplica a criação dos recursos considerando variáveis de ambiente | AWS_ACCESS_KEY_ID=[SUA-ACCESS-KEY] AWS_SECRET_KEY=[SUA-SECRET-KEY] terraform apply| 
-|Valida os comandos presentes nos arquivos | terraform validate| 
-|Formata o código dos arquivos| terraform fmt|
-|Formata o código dos arquivos varrendo as estruturas de pastas| terraform fmt -recursive|
-|Destrói os recursos criados| terraform destroy|
+```hcl
+terraform plan
+```
+
+- Aplica a criação dos recursos conforme o planejamento apresentado no "terraform plan":
+
+```hcl
+terraform apply
+```
+
+- Aplica a criação dos recursos conforme o planejamento apresentado no "terraform plan", porém, sem solicitar confirmação:
+
+```hcl
+terraform apply -auto-approve
+```
+
+- Aplica a criação dos recursos conforme o planejamento apresentado no "terraform plan", considerando variáveis de ambiente, caso tenham sido criadas:
+
+No exemplo abaixo, considera-se as variáveis de ambiente para credenciais de acesso de usuário IAM da AWS.
+
+```hcl
+AWS_ACCESS_KEY_ID=[tua-access-key] AWS_SECRET_KEY=[tua-secret-key] terraform apply
+```
+
+- Realiza a validação dos comandos presentes nos arquivos Terraform:
+
+```hcl
+terraform validate
+```
+
+- Realiza a formatação (identação) dos códigos presentes nos arquivos Terraform:
+
+```hcl
+terraform fmt
+```
+
+- Realiza a formatação (identação) dos códigos presentes nos arquivos Terraform, porém, de forma recursiva caso os arquivos estejam em uma estrutura hierarquica de pastas:
+
+```hcl
+terraform fmt -recursive
+```
+
+- Destrói os recursos criados no ambiente AWS:
+
+```hcl
+terraform destroy 
+```
 
 ## Autor
 
