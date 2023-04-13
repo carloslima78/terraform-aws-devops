@@ -71,7 +71,9 @@ instance_tags = {
   
   name = "web-dev"
 }
+```
 
+```hcl
 # prod.tfvars
 instance_count = 3
 
