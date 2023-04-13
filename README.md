@@ -62,17 +62,23 @@ on linux_amd64
 
 ## Comandos Básicos do Terraform
 
+
 - Apresenta a documentação dos comandos Terraform:
 
 ```hcl
 terraform -h 
 ```
 
+- Inicia o Terraform e instala os componentes de acordo com os recursos que serão criados:
+
+```hcl
+terraform init 
+```
+
 Demonstra a documentação dos comandos Terraform
 
 | Descrição | Comando | 
 |------|-------------|
-|Inicia o Terraform e instala os componentes de acordo com os recursos que serão criados| terraform init|
 |Apresenta o plano dos recursos que serão criados| terraform plan| 
 |Aplica a criação dos recursos conforme o "plan"| terraform apply| 
 |Aplica a criação dos recursos sem solicitar confirmação | terraform apply -auto-approve| 
