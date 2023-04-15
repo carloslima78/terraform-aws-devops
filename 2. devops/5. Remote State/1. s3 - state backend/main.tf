@@ -20,7 +20,7 @@ terraform {
       IMPORTANTE:
 
         - O backend deve ser criado após a criação do resource, neste caso o Bucket S3. 
-        - Antes de criar o backent, é necessário rodar o "terraform init novamente"
+        - Antes de criar o backend, é necessário rodar o "terraform init novamente"
   **/
   backend "s3" {
 
