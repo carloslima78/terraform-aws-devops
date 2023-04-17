@@ -56,7 +56,7 @@ module "website" {
 
   acl = "public-read"
 
-  // Permite que o módulo leita todos os arquivos dentro da pasta "Website"
+  // Permite que o módulo leia todos os arquivos dentro da pasta "Website"
   files = "${path.root}/2. Website"
 
   website = {
