@@ -15,7 +15,7 @@ data "template_file" "s3-public-policy" {
 # Módulo para o Bucket onde serão armazenado os Logs do Website.
 module "logs" {
 
-  source        = "github.com/chgasparoto/terraform-s3-object-notification"
+  source        = "github.com/carloslima78/terraform-s3-object-notification"
   name          = "${local.domain}-logs"
   acl           = "log-delivery-write"
   force_destroy = !local.has_domain
@@ -23,7 +23,7 @@ module "logs" {
 
 # Módulo para o Bucket onde serã hospedado o Website.
 module "website" {
-  source        = "github.com/chgasparoto/terraform-s3-object-notification"
+  source        = "github.com/carloslima78/terraform-s3-object-notification"
   name          = local.domain
   acl           = "public-read"
   policy        = data.template_file.s3-public-policy.rendered
@@ -48,7 +48,7 @@ module "website" {
 
 # Módulo para redirecionamento.
 module "redirect" {
-  source        = "github.com/chgasparoto/terraform-s3-object-notification"
+  source        = "github.com/carloslima78/terraform-s3-object-notification"
   name          = "www.${local.domain}"
   acl           = "public-read"
   force_destroy = !local.has_domain

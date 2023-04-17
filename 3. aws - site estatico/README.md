@@ -8,6 +8,7 @@ Repositório GitHub (https://github.com/facebook/create-react-app)
 
 ### Instalação da Aplicação React 
 
+
 O comando de instalação deve ser executado dentro da pasta onde a aplicação será instalada.
 
 - Comando para instalar a aplicação:
@@ -98,7 +99,15 @@ O resultado deve ser uma URL do CloudFront conforme abaixo, neste caso está sen
 
 ##  AWS Route 53
 
-[todo]
+Trata-se do serviço da AWS para gerenciamento de DNS (Domain Name System) que é responsável pelo monitoramento de servidores para roteamento de tráfego.
+
+Caso tenha um domínio registrado, o resultado deve ser uma URL apontando para o domínio conforme abaixo:
+
+- website-url = "seudominio.com"
+
+Caso não tenha um domínio registrado, a AWS personalizará um.
+
+Vale observar que executando os passos acima, a URL com o domínio personalizado seja registrado ou criado pela AWS, não estarão disponívies para acesso, dado que não foram verificado. Para solucionar, será necessária a criação de um certificado SSL.
 
 ##  Certificado SSL (ACM)
 
