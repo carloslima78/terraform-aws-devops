@@ -2,14 +2,14 @@
 
 # Declara o resource User Pool (Grupo de Usuários)
 resource "aws_cognito_user_pool" "my-pool" {
-  
+
   name = var.service_name
   tags = local.common_tags
 }
 
 # Declara o resource User Pool Client 
 resource "aws_cognito_user_pool_client" "my-client" {
-  
+
   name            = var.service_name
   user_pool_id    = aws_cognito_user_pool.my-pool.id
   generate_secret = false
