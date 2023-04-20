@@ -75,7 +75,26 @@ No arquivo Terraform "lambda.tf", declaramos os recursos abaixo.
 
 1. [todo]
 
+### Funão Lambda - S3
+
+[todo]
+
+### Funão Lambda - DynamoDB
+
+[todo]
+
 ### Lambda Layer
+
+Trata-se de um arquivo que contém código adicional, como bibliotecas, dependências exterbas ou até runtimes personalizados para compartilhamento entre as funções Lambda.
+
+[todo]
+
+
+## AWS S3
+
+Trata-se ...
+
+Será criado um bucket S3 que será responsável por disparar uma função Lambda para todo arquivo incluído, que por sua vez, dispara uma notificação para um tópico no AWS SNS e escreve um log no AWS CloudWatch.
 
 ## Criação dos Recursos da Aplicação Serveless
 
