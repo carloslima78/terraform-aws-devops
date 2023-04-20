@@ -1,5 +1,4 @@
 
-
 # Declara a tabela no DynamoDB
 resource "aws_dynamodb_table" "my-table" {
 

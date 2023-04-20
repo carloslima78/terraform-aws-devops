@@ -44,6 +44,8 @@ No arquivo Terraform "cognito.tf", declaramos os recursos abaixo.
 
 Trata-se do banco de dados NoSQL da AWS. Bastante similar ao MongoDB, porém, com particularidades. Vale observar que a AWS disponibiza o AWS DocumentDB, que é a implemtação do MongoDB na AWS.
 
+No escopo da nossa aplicação serveless, a tabela armazenará os dados oriundos do CRUD.
+
 ### Recursos que serão declarados e criados na AWS
 
 No arquivo Terraform "dynamodb.tf", declaramos os recursos abaixo.
@@ -60,6 +62,20 @@ No arquivo Terraform "dynamodb.tf", declaramos os recursos abaixo.
 
 - Documentação: (https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table_item)
 
+
+## AWS Lambda
+
+Trata-se de funções serveless para executarem ações em resposta a eventos (Triggers).
+
+No escopo da nossa aplicação serveless, serão duas funções Lambda para realizar as regras de negócio.
+
+### Recursos que serão declarados e criados na AWS
+
+No arquivo Terraform "lambda.tf", declaramos os recursos abaixo.
+
+1. [todo]
+
+### Lambda Layer
 
 ## Criação dos Recursos da Aplicação Serveless
 
