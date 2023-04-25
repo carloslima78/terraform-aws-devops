@@ -1,18 +1,10 @@
-
-
-// Função para integração com a tabela DynamoDB
-
 'use strict'
 
-// SDK da AWS para os clients
 const AWS = require('aws-sdk')
-
-// Client DinamoDB
 const dynamo = new AWS.DynamoDB.DocumentClient()
 
 const normalizeEvent = (event) => {
-    
-    // Caso o evento seja disparado pelo do SNS
+    // SNS
     if (event.Records) {
         return {
             method: 'POST',
@@ -21,7 +13,7 @@ const normalizeEvent = (event) => {
         }
     }
 
-    // Caso o evento seja disparado pelo Api Gateway
+    // Api Gateway
     return {
         method: event.httpMethod,
         data: JSON.parse(event.body),
@@ -29,14 +21,12 @@ const normalizeEvent = (event) => {
     }
 }
 
-// Handler para realizar o CRUD no banco de dados
 exports.handler = async (event) => {
 
     if (process.env.DEBUG) {
         console.log(`Received event: ${JSON.stringify(event)}`)
     }
 
-    
     const table = event.table || process.env.TABLE
     if (!table) {
         throw new Error('No table name defined.')
@@ -48,7 +38,6 @@ exports.handler = async (event) => {
     let res;
     let err;
 
-    // De acordo com a ação desejada, será realizada a interação com o banco DynamoDB
     try {
         switch (method) {
             case 'DELETE':

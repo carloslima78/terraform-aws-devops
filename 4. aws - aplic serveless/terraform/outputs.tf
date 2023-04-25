@@ -1,4 +1,3 @@
-
 output "cognito_pool_id" {
   value = aws_cognito_user_pool.my-pool.id
 }
@@ -37,4 +36,8 @@ output "api_url" {
 
 output "bucket_name" {
   value = aws_s3_bucket.todo.bucket
+}
+
+output "sns_arn" {
+  value = aws_sns_topic.this.arn
 }

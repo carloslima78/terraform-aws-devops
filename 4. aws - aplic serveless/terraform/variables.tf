@@ -2,7 +2,7 @@
 variable "aws_region" {
   type        = string
   description = ""
-  default     = "eu-central-1"
+  default     = "us-east-1"
 }
 
 variable "aws_account_id" {
@@ -14,11 +14,11 @@ variable "aws_account_id" {
 variable "service_name" {
   type        = string
   description = ""
-  default     = "exemplo"
+  default     = "Todos"
 }
 
 variable "service_domain" {
   type        = string
   description = ""
-  default     = "api-exemplo"
+  default     = "api-todos-nova"
 }
