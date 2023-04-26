@@ -1,3 +1,5 @@
+
+# Declara uma tabela no DynamoDB
 resource "aws_dynamodb_table" "this" {
   hash_key       = "TodoId"
   name           = var.service_name
@@ -12,6 +14,7 @@ resource "aws_dynamodb_table" "this" {
   tags = local.common_tags
 }
 
+# Declara um item a que será inserido na tabela do DynamoDB
 resource "aws_dynamodb_table_item" "todo" {
   table_name = aws_dynamodb_table.this.name
   hash_key   = aws_dynamodb_table.this.hash_key

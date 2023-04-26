@@ -1,13 +1,13 @@
 
 
-# Declara o resource User Pool (Grupo de Usuários)
+# Declara um User Pool (Grupo de Usuários) para armazenamento de usuários que vão se autentciar via Cognito 
 resource "aws_cognito_user_pool" "my-pool" {
 
   name = var.service_name
   tags = local.common_tags
 }
 
-# Declara o resource User Pool Client 
+# Declara um User Pool Client para autenticar os usuários no User Pool atuando como uma camada intermediária
 resource "aws_cognito_user_pool_client" "my-client" {
 
   name            = var.service_name
@@ -21,7 +21,14 @@ resource "aws_cognito_user_pool_client" "my-client" {
   supported_identity_providers         = ["COGNITO"]
 }
 
-# Declara o resource User Pool Domain
+# Declara um User Pool Domain para personalizar um domínio para o AWS Cognito
+
+  /* 
+  
+    A utilização do User Pool Domain é opcional, ele personalizará um domínio mais amigável, porém, se não for
+    declarado, o AWS Cognito atribuirá um nome de domínio padrão de forma automática.
+
+  */
 resource "aws_cognito_user_pool_domain" "my-domain" {
 
   domain       = var.service_domain
