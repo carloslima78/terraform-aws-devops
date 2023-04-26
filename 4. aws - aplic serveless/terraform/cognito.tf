@@ -21,9 +21,19 @@ resource "aws_cognito_user_pool_client" "my-client" {
   supported_identity_providers         = ["COGNITO"]
 }
 
+# Declara um usuário e senha para acesso via Cognito
+resource "aws_cognito_user" "teste" {
+
+  username     = "teste"
+  password     = "Teste@123"
+  user_pool_id = aws_cognito_user_pool.my-pool.id
+  depends_on   = [aws_cognito_user_pool_client.my-client]
+
+}
+
 # Declara um User Pool Domain para personalizar um domínio para o AWS Cognito
 
-  /* 
+/* 
   
     A utilização do User Pool Domain é opcional, ele personalizará um domínio mais amigável, porém, se não for
     declarado, o AWS Cognito atribuirá um nome de domínio padrão de forma automática.
