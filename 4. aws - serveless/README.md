@@ -1,6 +1,6 @@
 # AWS - Aplicação Serveless
 
-Será provisionada a infraestrutura Terraform para uma aplicação serveless com comunicação assíncrona e armazenamento de dados em banco de dados NoSQL, onde serão utilizados os produtos AWS:
+Será definida a infraestrutura Terraform para provisionamento de uma aplicação serveless para armazenamento de dados de forma síncrona via API e assíncrona via arquivos, utilizando os produtos AWS abaixo:
 
 - AWS Cognito
 - AWS API Gateway
@@ -14,17 +14,17 @@ Será provisionada a infraestrutura Terraform para uma aplicação serveless com
 
 Trata-se do recurso da AWS responsável pelo gerenciamento e autenticação de usuários. 
 
-- Será utilizado o Cognito User Pools, pois os usuários serão armazenados na AWS.
+- Será utilizado para garantir acesso seguro ao API Gateway responsável por catalogar a função Lambda que acessará a tabela DynamoDB.
 
 ### Recursos que serão declarados e criados na AWS
 
-No arquivo Terraform "cognito.tf", declaramos os recursos abaixo.
+No arquivo Terraform "cognito.tf":
 
 1. User Pool - aws_cognito_user_pool
 
-- Cria grupos de usuários do AWS Cognito, configura seus atributos e recursos como, clientes de aplicativos, domínio, servidores de recursos.
+-- Declara um grupo de usuários, configura seus atributos e recursos como, clientes de aplicativos, domínio, servidores de recursos, etc.
 
-- Documentação: (https://registry.terraform.io/modules/lgallard/cognito-user-pool/aws/latest)
+-- Documentação: (https://registry.terraform.io/modules/lgallard/cognito-user-pool/aws/latest)
 
 
 2. User Pool Client - aws_cognito_user_pool_client
