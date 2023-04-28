@@ -64,3 +64,36 @@ Trata-se do conjunto de regras de firewall virtual que controla o tráfego de en
 
 - Declara o provisionamento dos Security Groups (Grupos de Segurança) para controle de tráfego de entrada e saída.
 - Arquivo do Template no Projeto: security_group.tf
+
+## AWS Elastic Load Balancer (ELB)
+
+Trata-se do recurso responsável pela distribuição de carga entre as aplicações na AWS, além de verificar a saúde das mesmas.
+
+O Application Load Balancer (ALB) é um tipo de Elastic Load Balancer que permite rotear o tráfego da aplicação com base no conteúdo da camada de aplicação HTTP/HTTPS, como o URL da solicitação, os cabeçalhos HTTP e os métodos de solicitação. 
+
+Em nosso projeto, estará posicionado entre o Internet Gateway e as instâncias EC2.
+
+### Recurso Terraform (Resource): aws_lb
+
+- Declara o provisionamento de um Elastic Load Balancer do tipo Application Load Balancer.
+- Arquivo do Template no Projeto: alb.tf
+
+## AWS Target Group
+
+Trata-se de um grupo lógico de recursos, como instâncias EC2, containers Docker ou endereços IP, que recebem solicitações de tráfego de entrada do ALB. 
+
+O Target Group é responsável por rotear o tráfego para as instâncias corretas, com base nas regras de roteamento definidas pelo usuário.
+
+### Recurso Terraform (Resource): aws_lb_target_group
+
+- Declara o provisionamento de um Target Group para o Application Load Balancer.
+- Arquivo do Template no Projeto: alb.tf
+
+## AWS Listener
+
+Trata-se do recurso responsável por monitorar as solicitações de tráfego de entrada no ALB e encaminhá-las para o Target Group correto. O Listener é configurado com uma porta de escuta e um protocolo de transporte (HTTP, HTTPS ou TCP). 
+
+### Recurso Terraform (Resource): aws_lb_listener
+
+- Declara o provisionamento de um Listener para monitoramento das solicitações de tráfego de entrada.
+- Arquivo do Template no Projeto: alb.tf

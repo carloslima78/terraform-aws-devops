@@ -87,27 +87,30 @@ resource "aws_security_group" "db" {
   tags = merge(local.common_tags, { Name = "Database MySQL" })
 }
 
-# resource "aws_security_group" "alb" {
-#   name        = "ALB-SG"
-#   description = "Load Balancer SG"
-#   vpc_id      = aws_vpc.this.id
+# Declara o Security Group para o Elastic Load Balancer
+resource "aws_security_group" "alb" {
+  name        = "ALB-SG"
+  description = "Load Balancer SG"
+  vpc_id      = aws_vpc.this.id
 
-#   ingress {
-#     from_port   = 80
-#     to_port     = 80
-#     protocol    = "tcp"
-#     cidr_blocks = ["0.0.0.0/0"]
-#   }
+  # Aceitará entrada pela porta 80
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
-#   egress {
-#     from_port   = 0
-#     to_port     = 0
-#     protocol    = "-1"
-#     cidr_blocks = ["0.0.0.0/0"]
-#   }
+  # Aceitará saída para Internet
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
-#   tags = merge(local.common_tags, { Name = "Load Balancer" })
-# }
+  tags = merge(local.common_tags, { Name = "Load Balancer" })
+}
 
 # resource "aws_security_group" "autoscaling" {
 #   name        = "autoscaling"
