@@ -91,7 +91,7 @@ O Target Group é responsável por rotear e distribuir o tráfego para as instâ
 
 ## AWS Listener
 
-Trata-se do recurso responsável por monitorar as solicitações de tráfego de entrada no ALB e encaminhá-las para o Target Group correto. O Listener é configurado com uma porta de escuta e um protocolo de transporte (HTTP, HTTPS ou TCP). 
+Trata-se do recurso responsável por monitorar as solicitações de tráfego de entrada no Application Load Balancer e encaminhá-las para o Target Group correto. O Listener é configurado com uma porta de escuta e um protocolo de transporte (HTTP, HTTPS ou TCP). 
 
 ### Recurso Terraform (Resource): **aws_lb_listener**
 
@@ -100,4 +100,39 @@ Trata-se do recurso responsável por monitorar as solicitações de tráfego de 
 
 ## AWS Auto Scaling
 
+Trata-se do recurso que garante a disponibilidade e escalabilidade das aplicações de forma automática, de acordo com as necessidades de demanda e tráfego dos usuários.
+
 ### AWS Auto Scaling Group
+
+Trata-se do recurso responsável pelo gerenciamento da quantidade de instâncias EC2 em execução, ajustando-o de acordo com as métricas de desempenho da aplicação ou com base em horários específicos definidos pelo usuário. 
+
+O Auto Scaling Group permite que o número de instâncias em execução aumente ou diminua de acordo coma demadna, garantido que as aplicações estejam disponíveis e eficiêntes.
+
+### Recurso Terraform (Resource): ** **
+
+- Declara o provisionamento de um 
+- Arquivo do Template no Projeto: **ec2.tf**
+
+### Auto Scaling Group vs Target Group
+
+O **Auto Scaling Group** atua junto ao **Auto Scaling** e é responsável pelo gerenciamento da infraestrutura de computação que executa a aplicação, enquanto o **Target Group** atua junto ao **Application Load Balancer** e é responsável pelo direcionamento do tráfego de rede para as instâncias corretas.
+
+### Recurso Terraform (Data): ** aws_ami **
+
+- Declara a imagem (AMI) Ubuntu para a instância EC2 que será provisionada.
+- Arquivo do Template no Projeto: **ec2.tf**
+
+### Recurso Terraform (Resource): ** aws_launch_template **
+
+- Define o template personalizado para provisionamento da instância EC2.
+- Arquivo do Template no Projeto: **ec2.tf**
+
+### Recurso Terraform (Resource): ** aws_autoscaling_group **
+
+- Declara o provisionamento do Auto Scaling Group para gerenciamento da infraestrutura.
+- Arquivo do Template no Projeto: **ec2.tf**
+
+### Recurso Terraform (Resource): ** aws_autoscaling_policy **
+
+- Declara o provisionamento das políticas que o Auto Scaling seja capaz de provisionar e remover instâncias EC2.
+- Arquivo do Template no Projeto: **ec2.tf**

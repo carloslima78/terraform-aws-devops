@@ -2,7 +2,7 @@
 # Declara o Security Group para receber as requisições que serão redirecionadas para as instâncias
 resource "aws_security_group" "web" {
   name        = "Web"
-  description = "Allow public inbound traffic"
+  description = "Permite o trafego publico de entrada"
   vpc_id      = aws_vpc.this.id
 
   # Protocolo HTTP
@@ -44,7 +44,7 @@ resource "aws_security_group" "web" {
 resource "aws_security_group" "db" {
 
   name        = "DB"
-  description = "Allow incoming database connections"
+  description = "Permite conexoes de entrada no banco de dados"
   vpc_id      = aws_vpc.this.id
 
   ingress {
@@ -112,60 +112,62 @@ resource "aws_security_group" "alb" {
   tags = merge(local.common_tags, { Name = "Load Balancer" })
 }
 
-# resource "aws_security_group" "autoscaling" {
-#   name        = "autoscaling"
-#   description = "Security group that allows ssh/http and all egress traffic"
-#   vpc_id      = aws_vpc.this.id
+# Declara o Security Group para o Auto Scaling
+resource "aws_security_group" "autoscaling" {
 
-#   ingress {
-#     from_port   = 22
-#     to_port     = 22
-#     protocol    = "tcp"
-#     cidr_blocks = ["0.0.0.0/0"]
-#   }
+  name        = "autoscaling"
+  description = "Permite acesso de entrada e saida ssh/http as instancias EC2"
+  vpc_id      = aws_vpc.this.id
 
-#   ingress {
-#     from_port       = 80
-#     to_port         = 80
-#     protocol        = "tcp"
-#     security_groups = [aws_security_group.alb.id]
-#   }
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
-#   egress {
-#     from_port   = 0
-#     to_port     = 0
-#     protocol    = "-1"
-#     cidr_blocks = ["0.0.0.0/0"]
-#   }
+  ingress {
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
+    security_groups = [aws_security_group.alb.id]
+  }
 
-#   tags = merge(local.common_tags, { Name = "Auto Scaling" })
-# }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
-# resource "aws_security_group" "jenkins" {
-#   name        = "Jenkins"
-#   description = "Allow incoming connections to Jenkins machine"
-#   vpc_id      = aws_vpc.this.id
+  tags = merge(local.common_tags, { Name = "Auto Scaling" })
+}
 
-#   ingress {
-#     from_port   = 22
-#     to_port     = 22
-#     protocol    = "tcp"
-#     cidr_blocks = [aws_vpc.this.cidr_block]
-#   }
+resource "aws_security_group" "jenkins" {
+  name        = "Jenkins"
+  description = "Allow incoming connections to Jenkins machine"
+  vpc_id      = aws_vpc.this.id
 
-#   ingress {
-#     from_port   = -1
-#     to_port     = -1
-#     protocol    = "icmp"
-#     cidr_blocks = [aws_vpc.this.cidr_block]
-#   }
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = [aws_vpc.this.cidr_block]
+  }
 
-#   egress {
-#     from_port       = 22
-#     to_port         = 22
-#     protocol        = "tcp"
-#     security_groups = [aws_security_group.web.id]
-#   }
+  ingress {
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = [aws_vpc.this.cidr_block]
+  }
 
-#   tags = merge(local.common_tags, { Name = "Jenkins Machine" })
-# }
+  egress {
+    from_port       = 22
+    to_port         = 22
+    protocol        = "tcp"
+    security_groups = [aws_security_group.web.id]
+  }
+
+  tags = merge(local.common_tags, { Name = "Jenkins Machine" })
+}
