@@ -108,12 +108,8 @@ Trata-se do recurso responsável pelo gerenciamento da quantidade de instâncias
 
 O Auto Scaling Group permite que o número de instâncias em execução aumente ou diminua de acordo coma demadna, garantido que as aplicações estejam disponíveis e eficiêntes.
 
-### Recurso Terraform (Resource): ** **
 
-- Declara o provisionamento de um 
-- Arquivo do Template no Projeto: **ec2.tf**
-
-### Auto Scaling Group vs Target Group
+#### Auto Scaling Group vs Target Group
 
 O **Auto Scaling Group** atua junto ao **Auto Scaling** e é responsável pelo gerenciamento da infraestrutura de computação que executa a aplicação, enquanto o **Target Group** atua junto ao **Application Load Balancer** e é responsável pelo direcionamento do tráfego de rede para as instâncias corretas.
 
