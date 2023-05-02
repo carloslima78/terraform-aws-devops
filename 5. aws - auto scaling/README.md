@@ -11,12 +11,15 @@ Serão utilizados os recursos AWS abaixo:
 - AWS Security Group
 - AWS Elastic Load Balancer
 - AWS Auto Scaling
+- AWS CloudWatch
 - AWS EC2
 - AWS RDS
 
 ## AWS VPC (Virtual Private Cloud)
 
 Trata-se do recurso que permite a criação de uma rede privada isolada na AWS, onde é possível provisionar e gerenciar recursos de computação, armazenamento e rede de forma segura e escalável.
+
+No escopo do projeto, será a rede privada para a aplicação auto escalável.
 
 ### Recurso Terraform (Resource): **aws_vpc**
 
@@ -27,6 +30,8 @@ Trata-se do recurso que permite a criação de uma rede privada isolada na AWS, 
 
 Trata-se de um componente virtual do AWS VPC (Virtual Private Cloud), que permite que instâncias de computação dentro da VPC se comuniquem com a internet. Funciona como uma ponte entre a VPC e a Internet pública, permitindo que as instâncias dentro da VPC se comuniquem com serviços na Internet pública, como servidores web, serviços de API e outros recursos na nuvem.
 
+No escopo do projeto, será a porta de entrada para a rede privada VPC.
+
 ### Recurso Terraform (Resource): **aws_internet_gateway**
 
 - Declara o provisionamento de um Internet Gateway para acesso ao VPC.
@@ -35,7 +40,10 @@ Trata-se de um componente virtual do AWS VPC (Virtual Private Cloud), que permit
 ## AWS Subnet 
 
 Trata-se de uma divisão lógica de uma rede IP (Internet Protocol) em sub-redes menores para ajudar a organizar e gerenciar o tráfego de rede. Restringe o acesso à uma zona de disponibilidade em uma VPC.
+
 As subnets são altamente escaláveis e podem ser implantadas em várias zonas de disponibilidade (AZs) para aumentar a resiliência e a disponibilidade das aplicações.
+
+No escopo do projeto, teremos duas subnets públicas para isolamento das instâncias que receberão tráfego da internet e duas subnets privadas para isolamento das instâncias que receberão tráfego interno.
 
 ### Recurso Terraform (Resource): **aws_subnet**
 
@@ -130,5 +138,56 @@ O **Auto Scaling Group** atua junto ao **Auto Scaling** e é responsável pelo g
 
 ### Recurso Terraform (Resource): ** aws_autoscaling_policy **
 
-- Declara o provisionamento das políticas que o Auto Scaling seja capaz de provisionar e remover instâncias EC2.
+- Declara o provisionamento das políticas necessárias para que o Auto Scaling seja capaz de provisionar e remover instâncias EC2.
 - Arquivo do Template no Projeto: **ec2.tf**
+
+## AWS CloudWatch
+
+Trata-se do recurso da AWS para monitoramento e observabilidade que permite coletar e monitorar métricas, logs e eventos para serviços da AWS tais como instâncias EC2, balanceadores de carga, bancos de dados RDS, filas SQS, etc.
+
+## AWS CloudWatch Alarm
+
+Trata-se do recurso que permite monitorar recursos e aplicativos na AWS baseado em métricas, e definir alarmes para notificações quando essas métricas atingirem os limites predefinidos. 
+
+### Recurso Terraform (Resource): ** aws_cloudwatch_metric_alarm **
+
+- Declara o provisionamento dos alarmes para estimular o Auto Scaling a provisionar (UP) ou remover (Down) instâncias conforme demanda de processamento.
+- Arquivo do Template no Projeto: **cloudwatch.tf**
+
+## Provisionamento dos Recursos
+
+Serão apresentados os comandos Terraform para provisionar os recursos explicados acima e presentes nos arquivos do projeto.
+
+### Comandos Terraform
+
+- Inicia o Terraform e instala os componentes de acordo com os recursos declarados:
+
+```hcl
+terraform init 
+```
+
+- Formata e identa o código presente nos arquivos Terraform (Comando Opcional):
+
+```hcl
+terraform fmt 
+```
+
+- Valida o código e comandos presentes nos arquivos Terraform (Comando Opcional):
+
+```hcl
+terraform validate 
+```
+
+- Apresenta o plano dos recursos que serão provisionados de acordo com os arquivos Terraform:
+
+```hcl
+terraform plan
+```
+
+- Aplica o provisionamento (criação) dos recursos na AWS conforme o planejamento:
+
+```hcl
+terraform apply -auto-approve
+```
+
+## Testando a Aplicação Auto Escalável

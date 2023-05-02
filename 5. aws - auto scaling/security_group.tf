@@ -145,7 +145,7 @@ resource "aws_security_group" "autoscaling" {
 
 resource "aws_security_group" "jenkins" {
   name        = "Jenkins"
-  description = "Allow incoming connections to Jenkins machine"
+  description = "Permite conexoes de entrada para a instancia EC2 Jenkins"
   vpc_id      = aws_vpc.this.id
 
   ingress {
