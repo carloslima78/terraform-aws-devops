@@ -1,4 +1,4 @@
-package com.demo.s3;
+package com.example.demo;
 
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;

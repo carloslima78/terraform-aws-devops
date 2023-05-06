@@ -1,19 +1,20 @@
-package com.demo.s3;
+package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoS3Application {
+public class AwsDemoApplication {
 
 	public static void main(String[] args)
 	{
-		SpringApplication.run(DemoS3Application.class, args);
+		SpringApplication.run(AwsDemoApplication.class, args);
 		test();
 	}
 
 	public static void test(){
 
 		System.out.println("Deus é grande");
+
 	}
 }

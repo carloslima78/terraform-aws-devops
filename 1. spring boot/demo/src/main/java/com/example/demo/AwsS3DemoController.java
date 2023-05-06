@@ -1,4 +1,4 @@
-package com.demo.s3;
+package com.example.demo;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
@@ -16,7 +16,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/aws/s3")
-public class DemoS3Controller {
+public class AwsS3DemoController {
 
     @Autowired
     private AmazonS3 amazonS3;
@@ -46,10 +46,10 @@ public class DemoS3Controller {
 
     // Gera um Objeto (Arquivo .txt), escreve um texto e armazena no Bucket S3.
     @PostMapping("/writefile")
-    public void writeFile(@RequestParam String bucket, @RequestParam String arquivo, @RequestParam String conteudoArquivo){
+    public void writeFile(@RequestParam String nomeAqruivo, @RequestParam String conteudoArquivo){
 
         try {
-            this.amazonS3.putObject(bucket, arquivo + " .txt", conteudoArquivo);
+            this.amazonS3.putObject("terraformprofessorcarlos", nomeAqruivo + " .txt", conteudoArquivo);
 
         }
         catch (AmazonServiceException ase) {
