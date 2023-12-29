@@ -1,4 +1,3 @@
-
 # Definindo o provedor AWS
 provider "aws" {
   region = "us-east-1" # Substitua pela sua região desejada
@@ -22,6 +21,93 @@ resource "aws_sqs_queue" "pagamento_boleto" {
 # Criando a fila SQS para pagamento contábil
 resource "aws_sqs_queue" "pagamento_contabil" {
   name = "pagamento-contabil"
+}
+
+# Adicionando permissões para o tópico SNS escrever na fila
+resource "aws_sqs_queue_policy" "permissao_pagamento_pix" {
+  queue_url = aws_sqs_queue.pagamento_pix.id
+  policy    = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "sns.amazonaws.com"
+      },
+      "Action": [
+        "sqs:SendMessage"
+      ],
+      "Resource": [
+        "${aws_sqs_queue.pagamento_pix.arn}"
+      ],
+      "Condition": {
+        "ArnEquals": {
+          "aws:SourceArn": "${aws_sns_topic.pagamento_efetuado.arn}"
+        }
+      }
+    }
+  ]
+}
+EOF
+}
+
+# Adicionando permissões para o tópico SNS escrever na fila
+resource "aws_sqs_queue_policy" "permissao_pagamento_boleto" {
+  queue_url = aws_sqs_queue.pagamento_boleto.id
+  policy    = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "sns.amazonaws.com"
+      },
+      "Action": [
+        "sqs:SendMessage"
+      ],
+      "Resource": [
+        "${aws_sqs_queue.pagamento_boleto.arn}"
+      ],
+      "Condition": {
+        "ArnEquals": {
+          "aws:SourceArn": "${aws_sns_topic.pagamento_efetuado.arn}"
+        }
+      }
+    }
+  ]
+}
+EOF
+}
+
+# Adicionando permissões para o tópico SNS escrever na fila
+resource "aws_sqs_queue_policy" "permissao_pagamento_contabil" {
+  queue_url = aws_sqs_queue.pagamento_contabil.id
+  policy    = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "sns.amazonaws.com"
+      },
+      "Action": [
+        "sqs:SendMessage"
+      ],
+      "Resource": [
+        "${aws_sqs_queue.pagamento_contabil.arn}"
+      ],
+      "Condition": {
+        "ArnEquals": {
+          "aws:SourceArn": "${aws_sns_topic.pagamento_efetuado.arn}"
+        }
+      }
+    }
+  ]
+}
+EOF
 }
 
 # Criando a assinatura da fila "pagamento-pix" no tópico "pagamento-efetuado" com filtro
@@ -55,34 +141,24 @@ resource "aws_sns_topic_subscription" "assinatura_contabil" {
   topic_arn = aws_sns_topic.pagamento_efetuado.arn
   protocol  = "sqs"
   endpoint  = aws_sqs_queue.pagamento_contabil.arn
-
 }
 
 # Output para imprimir o nome do tópico
 output "topic_name" {
-
-    value = aws_sns_topic.pagamento_efetuado.name
+  value = aws_sns_topic.pagamento_efetuado.name
 }
 
 # Output para imprimir o nome da fila pagamento pix
 output "queue_name_pix" {
-
-    value = aws_sqs_queue.pagamento_pix.name
+  value = aws_sqs_queue.pagamento_pix.name
 }
 
 # Output para imprimir o nome da fila pagamento boleto
 output "queue_name_boleto" {
-
-    value = aws_sqs_queue.pagamento_boleto.name
+  value = aws_sqs_queue.pagamento_boleto.name
 }
 
 # Output para imprimir o nome da fila pagamento contabil
 output "queue_name_contabil" {
-
-    value = aws_sqs_queue.pagamento_contabil.name
+  value = aws_sqs_queue.pagamento_contabil.name
 }
-
-
-
-
-
